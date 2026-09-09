@@ -23,10 +23,10 @@ jobs:
       - name: Use the Parsed Inputs
         run: |
           echo "Using the user inputs in scripts or commands:"
-          echo "Selected Environment: ${{ steps.issue-parser.outputs.issuepayload_environment }}"
-          echo "Selected Action: ${{ steps.issue-parser.outputs.issuepayload_action_type }}"
+          echo "Selected Environment: ${{ steps.issue-parser.outputs.issueparser_environment }}"
+          echo "Selected Action: ${{ steps.issue-parser.outputs.issueparser_action_type }}"
           
           # Example of using it conditionally
           if [ "${{ steps.issue-parser.outputs.issuepayload_action_type }}" = "Deploy" ]; then
-            echo "Executing deployment to ${{ steps.issue-parser.outputs.issuepayload_environment }}..."
+            echo "Executing deployment to ${{ steps.issue-parser.outputs.issueparser_environment }}..."
           fi
