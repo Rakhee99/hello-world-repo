@@ -1,0 +1,29 @@
+name: Issue Input POC
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  process-inputs:
+    # Only run if the issue has the specific label from our template
+    if: contains(github.event.issue.labels.*.name, 'poc-trigger')
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Parse Issue Form Inputs
+        uses: stefanbuck/github-issue-parser@v3
+        id: issue-parser
+        with:
+          template-path: .github/ISSUE_TEMPLATE/poc-request.yml
+
+      - name: Use the Parsed Inputs
+        run: |
+          echo "Using the user inputs in scripts or commands:"
+          echo "Selected Environment: ${{ steps.issue-parser.outputs.issuepayload_environment }}"
+          echo "Selected Action: ${{ steps.issue-parser.outputs.issuepayload_action_type }}"
+          
+          # Example of using it conditionally
+          if [ "${{ steps.issue-parser.outputs.issuepayload_action_type }}" = "Deploy" ]; then
+            echo "Executing deployment to ${{ steps.issue-parser.outputs.issuepayload_environment }}..."
+          fi
