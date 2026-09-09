@@ -2,7 +2,7 @@ name: Issue Input POC
 
 on:
   issues:
-    types: [opened]
+    types: [opened, edited, labeled]
 
 jobs:
   process-inputs:
