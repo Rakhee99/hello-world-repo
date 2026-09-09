@@ -1,0 +1,23 @@
+name: POC Request
+description: File a request with custom inputs for the workflow.
+title: "[POC Request]: "
+labels: ["poc-trigger"]
+body:
+  - type: input
+    id: environment
+    attributes:
+      label: Target Environment
+      description: Enter the environment to deploy to (e.g., staging, production).
+      placeholder: staging
+    validations:
+      required: true
+  - type: dropdown
+    id: action_type
+    attributes:
+      label: Action Type
+      options:
+        - Deploy
+        - Rollback
+        - Status Check
+    validations:
+      required: true
